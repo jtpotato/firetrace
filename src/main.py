@@ -41,11 +41,11 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
 with gr.Blocks() as demo:
     with gr.Row():
         with gr.Column():
-            maxtemp = gr.Number()
-            maxtemp2 = gr.Number()
-            year = gr.Number()
-            month = gr.Number()
-            day = gr.Number()
+            maxtemp = gr.Number(label="Max temperature in Sydney")
+            maxtemp2 = gr.Number(label="Max temperature in Brisbane")
+            year = gr.Number(label="Year")
+            month = gr.Number(label="Month")
+            day = gr.Number(label="Day")
         with gr.Column():
             out = gr.Textbox()
     btn = gr.Button("Run")
