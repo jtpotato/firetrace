@@ -32,6 +32,7 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
             This is {percentage}% of the Black Saturday week.""")
 
 with gr.Blocks() as demo:
+    gr.Image(src='https://raw.githubusercontent.com/jtpotato/firetrace/fe00ca92f3ca2280118bc8b4784396055dd53513/assets/banner.svg', alt="Firetrace Logo")
     gr.Markdown(
         """
         Q: What's the deal with Firetrace? 🔍\n
@@ -68,7 +69,7 @@ with gr.Blocks() as demo:
             month = gr.Number(label="Month")
             day = gr.Number(label="Day")
         with gr.Column():
-            out = gr.Textbox()
+            out = gr.Textbox(label="Predicted Result")
     btn = gr.Button("Run")
     gr.Markdown(
         "The scanned area of fires for the week of Black Saturday was 1043.8 square kilometres. 🔥")
