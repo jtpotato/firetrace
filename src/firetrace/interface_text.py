@@ -17,7 +17,7 @@ q_and_a = """
         A: It's easy-peasy! 🔥 
         Simply enter in values for the input boxes below, and you'll unlock access to the hottest predictions, 
         and uncover the secrets of bushfire severity. 
-        The prediction you receive will be in the form of a percentage - the area covered your bushfire as a percentage of the area covered by the most severe week of the 2011-2012 bushfire season 
+        The prediction you receive will be the number of square kilometres of land the fire covers that day.
         (Keep in mind that it's not completely right, we're not wizards here 🧙  - but it does have reasonable accuracy)
         \n
 

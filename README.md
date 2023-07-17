@@ -15,3 +15,13 @@ A diagram of the shape of the model.
 - [ ] Gradio UI
 - [ ] Web API
 - [ ] Take more factors into consideration
+
+# Development
+We recommend running the following commands to get started:
+```bash
+pip install tensorflow # pip3 install tensorflow
+pip install gradio # pip3 install gradio
+
+# mac users
+pip3 install tensorflow-metal
+```

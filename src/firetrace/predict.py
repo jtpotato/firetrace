@@ -7,9 +7,12 @@ loaded_model = keras.models.load_model("model/model.keras")
 
 
 def ui_predict(max_temp_syd, max_temp_bne, year, month, day):
-    predictions = fire_predict(max_temp_syd, max_temp_bne, year, month, day)
-    additional = additional_context(predictions)
-    return predictions, additional
+    try: 
+        predictions = fire_predict(max_temp_syd, max_temp_bne, year, month, day)
+        additional = additional_context(predictions)
+        return predictions, additional
+    except Exception as e:
+        return "Error", e
 
 
 def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
@@ -34,7 +37,7 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
 
 
 def additional_context(scan_area):
-    LARGEST_EVENT = 2505.371429
+    LARGEST_EVENT = 5854.7
 
     percentage = round((scan_area / LARGEST_EVENT) * 100, 2)
-    return f"""The scanned area of your fires was {round(scan_area, 2)} square kilometres. This is {percentage}% of the largest fire event in our database, at {round(LARGEST_EVENT, 2)} square kilometres, recorded on the week of the 25th of September, 2011."""
+    return f"""The scanned area of your fires was {round(scan_area, 2)} square kilometres. This is {percentage}% of the largest fire event in our database, at {round(LARGEST_EVENT, 2)} square kilometres, recorded on the 19th of September 2011."""
