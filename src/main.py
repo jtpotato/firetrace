@@ -10,7 +10,7 @@ with gr.Blocks() as demo:
         with gr.Column():
             maxtemp = gr.Number(label="Max temperature in Sydney")
             maxtemp2 = gr.Number(label="Max temperature in Brisbane")
-            year = gr.Number(label="Year")
+            year = gr.Number(label="Year", minimum=2000, maximum=9999)
             month = gr.Number(label="Month")
             day = gr.Number(label="Day")
         with gr.Column():
