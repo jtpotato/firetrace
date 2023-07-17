@@ -37,4 +37,4 @@ def additional_context(scan_area):
     LARGEST_EVENT = 2505.371429
 
     percentage = round((scan_area / LARGEST_EVENT) * 100, 2)
-    return f"""The scanned area of your fires was {scan_area} square kilometres. This is {percentage}% of the largest fire event in our database, at {LARGEST_EVENT} square kilometres, recorded on the week of the 25th of September, 2011."""
+    return f"""The scanned area of your fires was {round(scan_area, 2)} square kilometres. This is {percentage}% of the largest fire event in our database, at {round(LARGEST_EVENT, 2)} square kilometres, recorded on the week of the 25th of September, 2011."""
