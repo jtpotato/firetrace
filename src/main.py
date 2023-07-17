@@ -34,7 +34,7 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
 with gr.Blocks() as demo:
     gr.Markdown(
         """
-        <img src="https://raw.githubusercontent.com/small-brain-ferret/yicte-bushfires/1f1481e28588b39f7cef2bb4c13dc25fe280d1bc/assets/banner.svg" alt="Firetrace Logo" />
+        <img src="https://raw.githubusercontent.com/jtpotato/firetrace/assets/banner.svg" alt="Firetrace Logo" />
         
         ### **Q: What's the deal with Firetrace? 🔍**\n
         A: Picture this—it's like having your very own bushfire fortune teller! 
