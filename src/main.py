@@ -1,5 +1,5 @@
 import gradio as gr
-from firetrace.predict import fire_predict
+from firetrace.predict import ui_predict
 from firetrace import interface_text
 
 with gr.Blocks() as demo:
@@ -21,7 +21,7 @@ with gr.Blocks() as demo:
     gr.Markdown(interface_text.q_and_a)
 
     btn.click(
-        fn=fire_predict,
+        fn=ui_predict,
         inputs=[maxtemp, maxtemp2, year, month, day],
         outputs=[out, additional_info],
     )
