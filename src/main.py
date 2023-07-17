@@ -4,7 +4,7 @@ from firetrace import interface_text
 
 with gr.Blocks() as demo:
     gr.Markdown(
-        """<img src="https://raw.githubusercontent.com/jtpotato/firetrace/main/assets/banner.svg" alt="Firetrace Logo" />"""
+        """<img src="https://raw.githubusercontent.com/jtpotato/firetrace/main/assets/banner-transparent.svg" alt="Firetrace Logo" />"""
     )
     with gr.Row():
         with gr.Column():
@@ -25,5 +25,11 @@ with gr.Blocks() as demo:
         inputs=[maxtemp, maxtemp2, year, month, day],
         outputs=[out, additional_info],
     )
+
+    with open("src/js/onload.js", "r") as f:
+        scripts = f.read()
+        print(scripts)
+
+        demo.load(None, None, None, _js=scripts)
 
 demo.launch()
