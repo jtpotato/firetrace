@@ -32,24 +32,25 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
             This is {percentage}% of the Black Saturday week.""")
 
 with gr.Blocks() as demo:
-    gr.Image(src='https://raw.githubusercontent.com/jtpotato/firetrace/fe00ca92f3ca2280118bc8b4784396055dd53513/assets/banner.svg', alt="Firetrace Logo")
     gr.Markdown(
         """
-        Q: What's the deal with Firetrace? 🔍\n
+        <img src="https://raw.githubusercontent.com/small-brain-ferret/yicte-bushfires/1f1481e28588b39f7cef2bb4c13dc25fe280d1bc/assets/banner.svg" alt="Firetrace Logo" />
+        
+        ### **Q: What's the deal with Firetrace? 🔍**\n
         A: Picture this—it's like having your very own bushfire fortune teller! 
         🔮 Firetrace is an AI-powered web interface that predicts the severity of bushfire events all across Australia. 
         🌍 It's armed with projected weather data, BOM weather observatories and NASA's MODIS satellite intel. 
         It even considers time information to get climate change trends. 🦸‍♂️🔥
         \n
 
-        Q: What is the inspiration behind Firetrace? 🤔 \n
+        ### **Q: What is the inspiration behind Firetrace?** 🤔 \n
         A: Those bushfires, mate! They cause habitat loss, put many animal species at risk, and drastically impact the economy 😢📉 
         The series of bushfires that took place in Australia is a clear demonstration of this. 
         ☝️ So, we put our heads together to conjure up Firetrace—a cutting-edge tool that helps us predict the severity of these fiery events.
         This will be helpful in making smarter decisions and being prepared to take on the bushfire challenges head-on! 💪🌳
         \n
 
-        Q: How do I use Firetrace? 🎉 \n
+        ### **Q: How do I use Firetrace?** 🎉 \n
         A: It's easy-peasy! 🔥 
         Simply enter in values for the input boxes below, and you'll unlock access to the hottest predictions, 
         and uncover the secrets of bushfire severity. 
