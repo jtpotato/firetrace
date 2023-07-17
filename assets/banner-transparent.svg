@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 100">
+    <filter id="blur">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
+
+    <style>
+        text {
+            font-family: sans-serif;
+            font-weight: 700;
+        }
+
+        #firetracetext {
+            fill: none;
+        }
+
+        use {
+            fill: none;
+            stroke-dasharray: 50 40;
+            stroke-width: 2px;
+            stroke-linecap: round;
+            animation: textanimation 600s linear infinite;
+        }
+
+        .color1 {
+            stroke: #bfff6b;
+            animation-delay: -1s;
+        }
+
+        .color2 {
+            stroke: #ffa200;
+            animation-delay: 0s;
+        }
+
+        @keyframes textanimation {
+            0% {
+                stroke-dashoffset: 0%;
+            }
+
+            100% {
+                stroke-dashoffset: 2000%;
+            }
+        }
+    </style>
+
+    <rect width="1000" height="100" fill="none" />
+    <g transform="translate(500,50)">
+        <text x="0" y="0" id="firetracetext" text-anchor="middle" dominant-baseline="central"
+            font-size="80px">Firetrace</text>
+        <use xlink:href="#firetracetext" class="color1"></use>
+        <use xlink:href="#firetracetext" class="color2" filter="url(#blur) brightness(2) saturate(5) contrast(2) opacity(2)"></use>
+        <use xlink:href="#firetracetext" class="color2"></use>
+    </g>
+
+</svg>
