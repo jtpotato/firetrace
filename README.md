@@ -1,3 +1,14 @@
+---
+title: "Firetrace"
+emoji: "🔥"
+colorFrom: "yellow"
+colorTo: "gray"
+sdk: "gradio"
+python_version: "3.11"
+sdk_version: "3.36.1"
+app_file: src/main.py
+pinned: true
+---
 <img src="./assets/banner.svg" alt="Firetrace Logo" />
 
 # About
