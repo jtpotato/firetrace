@@ -7,8 +7,8 @@ Launching: 21/07/2023
 
 ![A diagram of the shape of the model.](./assets/Schematic.jpg)
 A diagram of the shape of the model.
-- 16 input nodes
-- 2 hidden layers, 64 nodes each
+- 8 input nodes
+- 7 hidden layers, 32 nodes each
 - 1 output node
 
 # Roadmap
