@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-loaded_model = keras.models.load_model("model/model.keras")
+loaded_model = keras.models.load_model("model/model.h5")
 
 
 def ui_predict(max_temp_syd, max_temp_bne, year, month, day):
