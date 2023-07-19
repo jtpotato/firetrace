@@ -6,16 +6,16 @@ from datetime import datetime
 loaded_model = keras.models.load_model("model/model.h5")
 
 
-def ui_predict(max_temp_syd, max_temp_bne, year, month, day):
+def ui_predict(max_temp_syd, max_temp_bne, year, month, day, soi):
     try: 
-        predictions = fire_predict(max_temp_syd, max_temp_bne, year, month, day)
+        predictions = fire_predict(max_temp_syd, max_temp_bne, year, month, day, soi)
         additional = additional_context(predictions)
         return predictions, additional
     except Exception as e:
         return "Error", e
 
 
-def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
+def fire_predict(max_temp_syd, max_temp_bne, year, month, day, soi):
     date = datetime(int(year), int(month), int(day))
     day_of_year = int(date.strftime("%j"))
 
@@ -28,6 +28,7 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day):
         "year": [year - 2000],
         "time_sin": [time_sin],
         "time_cos": [time_cos],
+        "soi": [soi],
     }
     data_df = pd.DataFrame(data=data)
 
