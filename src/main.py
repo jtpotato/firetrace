@@ -10,6 +10,7 @@ with gr.Blocks() as demo:
         with gr.Column():
             maxtemp = gr.Number(label="Max temperature in Sydney")
             maxtemp2 = gr.Number(label="Max temperature in Brisbane")
+            soi = gr.Number(label="Southern Oscillation Index")
             year = gr.Number(label="Year", minimum=2000, maximum=9999)
             month = gr.Number(label="Month")
             day = gr.Number(label="Day")
@@ -22,7 +23,7 @@ with gr.Blocks() as demo:
 
     btn.click(
         fn=ui_predict,
-        inputs=[maxtemp, maxtemp2, year, month, day],
+        inputs=[maxtemp, maxtemp2, year, month, day, soi],
         outputs=[out, additional_info],
     )
 
