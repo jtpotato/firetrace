@@ -8,6 +8,7 @@ python_version: "3.11"
 sdk_version: "3.36.1"
 app_file: src/main.py
 pinned: true
+fullWidth: true
 ---
 <img src="./assets/banner.svg" alt="Firetrace Logo" />
 
