@@ -10,28 +10,23 @@ with gr.Blocks() as demo:
         with gr.Column():
             with gr.Row():
                 with gr.Column():
-                    independent_var = gr.Dropdown(choices=["Max temperature in Sydney", "Max temperature in Brisbane", "Southern Oscillation Index", "Date"], label="Independent Variable", default="Date")
-                    gr.Markdown("Note: The inputs are not hidden even if you have selected them as the independent variable.")
-            with gr.Row():
-                with gr.Column():
                     maxtemp = gr.Number(label="Max temperature in Sydney")
                     maxtemp2 = gr.Number(label="Max temperature in Brisbane")
                     soi = gr.Number(label="Southern Oscillation Index")
-                    year = gr.Number(label="Year", minimum=2000, maximum=9999)
+                    year = gr.Number(label="Year")
                     month = gr.Number(label="Month")
                     day = gr.Number(label="Day")
         with gr.Column():
             out = gr.Textbox(label="Fire Scan Area")
-            additional_info = gr.Textbox(label="Additional Info")
-            graph = gr.Plot(label="Graph")
+            additional_info = gr.Markdown(label="Additional Info")
     btn = gr.Button("Run")
 
     gr.Markdown(interface_text.q_and_a)
 
     btn.click(
         fn=ui_predict,
-        inputs=[independent_var, maxtemp, maxtemp2, year, month, day, soi],
-        outputs=[out, additional_info, graph],
+        inputs=[maxtemp, maxtemp2, year, month, day, soi],
+        outputs=[out, additional_info],
     )
 
     with open("src/js/onload.js", "r") as f:
