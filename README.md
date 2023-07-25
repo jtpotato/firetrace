@@ -17,11 +17,11 @@ Firetrace is an AI model and web interface that predicts the severity of bushfir
 
 Launching: 3/08/2023
 
-![A diagram of the shape of the model.](./assets/Schematic.jpg)
-A diagram of the shape of the model.
+## Specs
 - 8 input nodes
-- 7 hidden layers, 32 nodes each
+- 32 node hidden layers x10
 - 1 output node
+- 20,454 parameter count
 
 # Roadmap
 - [x] Gradio UI
