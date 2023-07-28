@@ -4,10 +4,12 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+from src.firetrace.interface_text import additional_context
+
 # Disable GPU
 tf.config.set_visible_devices([], "GPU")
 
-loaded_model = keras.models.load_model("model/model.h5")
+loaded_model = tf.saved_model.load("./model")
 
 
 def ui_predict(max_temp_syd, max_temp_bne, year, month, day, soi):
@@ -40,17 +42,7 @@ def fire_predict(max_temp_syd, max_temp_bne, year, month, day, soi):
 
     print(data_df)
 
-    prediction = loaded_model.predict(data_df)
-    predicted_fire_area = prediction.item(0)
+    prediction = loaded_model.serve(data_df)
+    predicted_fire_area = prediction.numpy()[0][0]
     print(prediction, predicted_fire_area)
     return predicted_fire_area
-
-
-def additional_context(scan_area):
-    LARGEST_EVENT = 5854.7
-    AUSTRALIA_AREA = 7.688 * 10**6
-
-    percentage_largest = round((scan_area / LARGEST_EVENT) * 100, 2)
-    percentage_australia = round((scan_area / AUSTRALIA_AREA) * 100, 2)
-
-    return f"""The predicted area of your fires 🤓 was `{round(scan_area, 2)}` square kilometres. 🤯 This is `{percentage_largest}%` of the largest fire event 🔥 in our database, at {round(LARGEST_EVENT, 2)} square kilometres, recorded on the 19th of September 2011. This is also `{percentage_australia}%` of Australia's land size. 😧"""
