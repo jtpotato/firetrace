@@ -1,3 +1,5 @@
+from decimal import *
+
 q_and_a = """        
         ### **Q: What's the deal with Firetrace? 🔍**\n
         A: Picture this—it's like having your very own bushfire fortune teller! 
@@ -26,11 +28,14 @@ q_and_a = """
 
 def additional_context(scan_area):
     def get_percentage(scan_area, area):
-        return round((scan_area / area) * 100, 2)
+        result =  (scan_area / area) * 100
+        return Decimal(str(result)).quantize(Decimal("0.01")) # Decimal is required because Python doesn't handle floating points very well by default.
     
     def get_times(scan_area, area):
-        return round(scan_area / area, 2)
+        result = scan_area / area
+        return Decimal(str(result)).quantize(Decimal("0.01"))
     
+    rounded_fire_area = Decimal(str(scan_area)).quantize(Decimal("0.01"))
     LARGEST_EVENT = 5854.7
     MELBOURNE_AREA = 9993
     PORT_JACKSON_BAY_AREA = 55
@@ -38,7 +43,7 @@ def additional_context(scan_area):
     ACT_AREA = 2400
 
     context_string = f"""
-        The predicted area of your fires 🤓 was `{round(scan_area, 2)}` square kilometres. 🤯 This is `{get_percentage(scan_area, LARGEST_EVENT)}%` of the largest fire event 🔥 in our database, at {round(LARGEST_EVENT, 2)} square kilometres, recorded on the 19th of September 2011.
+        In this hypothetical scenario, `{rounded_fire_area}` square kilometres of fire would be burning simultaneously across the entire country. 🤯 This is `{get_percentage(scan_area, LARGEST_EVENT)}%` of the largest fire event 🔥 in our database, at {LARGEST_EVENT} square kilometres, recorded on the 19th of September 2011.
         
         ### Other things this fire compares to:
         - `{get_percentage(scan_area, MELBOURNE_AREA)}%` of Greater Melbourne. 😧
