@@ -15,6 +15,7 @@ loaded_model = tf.saved_model.load("./model")
 def ui_predict(max_temp_syd, max_temp_bne, year, month, day, soi):
     try:
         predictions = fire_predict(max_temp_syd, max_temp_bne, year, month, day, soi)
+        print(predictions)
         additional = additional_context(predictions)
         return predictions, additional
     except Exception as e:

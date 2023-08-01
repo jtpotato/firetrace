@@ -13,7 +13,7 @@ with gr.Blocks() as demo:
                     maxtemp = gr.Number(label="Max temperature in Sydney")
                     maxtemp2 = gr.Number(label="Max temperature in Brisbane")
                     soi = gr.Number(label="Southern Oscillation Index")
-                    year = gr.Number(label="Year")
+                    year = gr.Number(label="Year", maximum=9999)
                     month = gr.Number(label="Month")
                     day = gr.Number(label="Day")
         with gr.Column():
