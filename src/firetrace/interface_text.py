@@ -1,3 +1,5 @@
+from decimal import *
+
 q_and_a = """        
         ### **Q: What's the deal with Firetrace? 🔍**\n
         A: Picture this—it's like having your very own bushfire fortune teller! 
@@ -17,9 +19,37 @@ q_and_a = """
         A: It's easy-peasy! 🔥 
         Simply enter in values for the input boxes below, and you'll unlock access to the hottest predictions, 
         and uncover the secrets of bushfire severity. 
-        The prediction you receive will be in the form of a percentage - the area covered your bushfire as a percentage of the area covered by the most severe week of the 2011-2012 bushfire season 
-        (Keep in mind that it's not completely right - but it does have reasonable accuracy)
+        The prediction you receive will be the number of square kilometres of land the fire covers that day.
+        (Keep in mind that it's not completely right, we're not wizards here 🧙  - but it does have reasonable accuracy)
         \n
 
         Let's work together to face these fiery challenges to create a safer future! 🚀🌿
         """
+
+def additional_context(scan_area):
+    def get_percentage(scan_area, area):
+        result =  (scan_area / area) * 100
+        return Decimal(str(result)).quantize(Decimal("0.01")) # Decimal is required because Python doesn't handle floating points very well by default.
+    
+    def get_times(scan_area, area):
+        result = scan_area / area
+        return Decimal(str(result)).quantize(Decimal("0.01"))
+    
+    rounded_fire_area = Decimal(str(scan_area)).quantize(Decimal("0.01"))
+    LARGEST_EVENT = 5854.7
+    MELBOURNE_AREA = 9993
+    PORT_JACKSON_BAY_AREA = 55
+    MURRAY_DARLING_BASIN_AREA = 1059000
+    ACT_AREA = 2400
+
+    context_string = f"""
+        In this hypothetical scenario, `{rounded_fire_area}` square kilometres of fire would be burning simultaneously across the entire country. 🤯 This is `{get_percentage(scan_area, LARGEST_EVENT)}%` of the largest fire event 🔥 in our database, at {LARGEST_EVENT} square kilometres, recorded on the 19th of September 2011.
+        
+        ### Other things this fire compares to:
+        - `{get_percentage(scan_area, MELBOURNE_AREA)}%` of Greater Melbourne. 😧
+        - `{get_times(scan_area, PORT_JACKSON_BAY_AREA)}` Port Jackson Bays 🌊
+        - `{get_percentage(scan_area, MURRAY_DARLING_BASIN_AREA)}%` of the Murray-Darling Basin. 🌾
+        - `{get_percentage(scan_area, ACT_AREA)}%` of the ACT. 🏙️
+        """
+
+    return context_string
