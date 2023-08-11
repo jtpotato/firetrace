@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-from src.firetrace.interface_text import additional_context
+from firetrace.interface_text import additional_context
 
 # Disable GPU
 tf.config.set_visible_devices([], "GPU")
