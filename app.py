@@ -2,7 +2,13 @@ import gradio as gr
 from firetrace.predict import ui_predict
 from firetrace import interface_text
 
-with gr.Blocks() as demo:
+theme = gr.themes.Default(
+    neutral_hue="zinc",
+    font=[gr.themes.GoogleFont('Poppins'), 'ui-sans-serif', 'system-ui', 'sans-serif'],
+    font_mono=[gr.themes.GoogleFont('JetBrains Mono'), 'ui-monospace', 'Consolas', 'monospace'],
+)
+
+with gr.Blocks(theme=theme) as demo:
     gr.Markdown(
         """<img src="https://raw.githubusercontent.com/jtpotato/firetrace/main/assets/banner-transparent.svg" alt="Firetrace Logo" />"""
     )
