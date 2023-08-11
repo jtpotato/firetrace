@@ -3,8 +3,9 @@ title: "Firetrace"
 emoji: "🔥"
 colorFrom: "yellow"
 colorTo: "gray"
-sdk: "docker"
-app_port: 7860
+sdk: "gradio"
+python_version: "3.11"
+sdk_version: "3.39.0"
 pinned: true
 fullWidth: true
 ---
