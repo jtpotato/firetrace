@@ -34,4 +34,4 @@ with gr.Blocks() as demo:
         print(scripts)
 
 demo.queue(concurrency_count=8, api_open=False)
-demo.launch(server_port=7861)
+demo.launch()
