@@ -33,5 +33,6 @@ with gr.Blocks() as demo:
         scripts = f.read()
         print(scripts)
 
-demo.queue(concurrency_count=8, api_open=False)
-demo.launch()
+if __name__ == "__main__":
+    demo.queue(concurrency_count=8, api_open=False)
+    demo.launch()
