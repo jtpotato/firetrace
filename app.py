@@ -43,7 +43,7 @@ with gr.Blocks(theme=theme) as demo:
         print(scripts)
         demo.load(_js=scripts) # load can only be called within a Blocks context
 
-demo.queue(concurrency_count=8, api_open=False)
+demo.queue(concurrency_count=8)
 
 if __name__ == "__main__":
     demo.launch()
