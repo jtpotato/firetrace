@@ -12,8 +12,6 @@ with gr.Blocks(theme=theme) as demo:
     gr.Markdown(
         """<img src="https://raw.githubusercontent.com/jtpotato/firetrace/main/assets/banner-transparent.svg" alt="Firetrace Logo" />"""
     )
-    
-    btn = gr.Button("Run")
 
     with gr.Row():
         with gr.Column():
@@ -26,8 +24,11 @@ with gr.Blocks(theme=theme) as demo:
                     month = gr.Number(label="Month")
                     day = gr.Number(label="Day")
         with gr.Column():
-            out = gr.Textbox(label="Fire Scan Area")
-            additional_info = gr.Markdown(label="Additional Info")
+            with gr.Group():
+                out = gr.Textbox(label="Fire Scan Area")
+                with gr.Box():
+                    additional_info = gr.Markdown(label="Additional Info", value="Waiting for input...")
+            btn = gr.Button("Run", variant="primary")
 
     gr.Markdown(interface_text.q_and_a)
 
