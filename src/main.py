@@ -35,4 +35,4 @@ with gr.Blocks() as demo:
 
         demo.load(None, None, None, _js=scripts)
 
-demo.launch()
+demo.launch(server_port=7860)
