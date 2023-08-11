@@ -32,7 +32,9 @@ with gr.Blocks() as demo:
     with open("src/js/onload.js", "r") as f:
         scripts = f.read()
         print(scripts)
+        demo.load(_js=scripts) # load can only be called within a Blocks context
+
+demo.queue(concurrency_count=8, api_open=False)
 
 if __name__ == "__main__":
-    demo.queue(concurrency_count=8, api_open=False)
     demo.launch()
