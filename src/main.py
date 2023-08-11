@@ -33,6 +33,5 @@ with gr.Blocks() as demo:
         scripts = f.read()
         print(scripts)
 
-        demo.load(None, None, None, _js=scripts)
-
-demo.launch(server_port=7860)
+demo.queue(concurrency_count=8, api_open=False)
+demo.launch(server_port=7861)
