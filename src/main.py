@@ -1,6 +1,6 @@
 import gradio as gr
-from src.firetrace.predict import ui_predict
-from src.firetrace import interface_text
+from firetrace.predict import ui_predict
+from firetrace import interface_text
 
 with gr.Blocks() as demo:
     gr.Markdown(
