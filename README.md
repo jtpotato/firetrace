@@ -5,8 +5,8 @@ colorFrom: "yellow"
 colorTo: "gray"
 sdk: "gradio"
 python_version: "3.11"
-sdk_version: "3.39.0"
-app_file: "src/main.py"
+sdk_version: "3.40.1"
+app_file: "app.py"
 pinned: true
 fullWidth: true
 ---
