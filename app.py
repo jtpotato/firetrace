@@ -1,12 +1,14 @@
+"""
+This file contains all of the UI elements in the Gradio interface.
+
+The UI allows people to interact with the AI :)
+"""
+
 import gradio as gr
 from firetrace.predict import ui_predict
 from firetrace import interface_text
 
-theme = gr.themes.Default(
-    neutral_hue="zinc",
-    font=[gr.themes.GoogleFont('Poppins'), 'ui-sans-serif', 'system-ui', 'sans-serif'],
-    font_mono=[gr.themes.GoogleFont('JetBrains Mono'), 'ui-monospace', 'Consolas', 'monospace'],
-)
+from firetrace.theme import theme
 
 with gr.Blocks(theme=theme) as demo:
     gr.Markdown(
@@ -38,7 +40,7 @@ with gr.Blocks(theme=theme) as demo:
         outputs=[out, additional_info],
     )
 
-    with open("src/js/onload.js", "r") as f:
+    with open("firetrace/js/onload.js", "r") as f:
         scripts = f.read()
         print(scripts)
         demo.load(_js=scripts) # load can only be called within a Blocks context
