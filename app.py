@@ -34,6 +34,8 @@ with gr.Blocks(theme=theme) as demo:
 
     gr.Markdown(interface_text.q_and_a)
 
+    gr.Markdown(interface_text.privacy)
+
     btn.click(
         fn=ui_predict,
         inputs=[maxtemp, maxtemp2, year, month, day, soi],
