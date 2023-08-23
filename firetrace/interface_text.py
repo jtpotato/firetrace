@@ -26,6 +26,8 @@ q_and_a = """
         Let's work together to face these fiery challenges to create a safer future! 🚀🌿
         """
 
+privacy = "*By using this app you consent to the collection of: your user agent string (informing us of what type of device you might be using this on, to improve your experience), the time you have accessed this website, the time zone name (giving us an approximate geographic location to understand the demographics of our users, informing future decisions around localisation) as well as any input you have provided. No other information is collected, we swear.*"
+
 def additional_context(scan_area):
     def get_percentage(scan_area, area):
         result =  (scan_area / area) * 100
