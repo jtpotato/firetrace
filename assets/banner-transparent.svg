@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1000 100">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 100">
     <filter id="blur">
         <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
     </filter>
@@ -42,8 +42,8 @@
         }
     </style>
 
-    <rect width="1000" height="100" fill="none" />
-    <g transform="translate(500,50)">
+    <rect width="500" height="100" fill="none" />
+    <g transform="translate(250,50)">
         <text x="0" y="0" id="firetracetext" text-anchor="middle" dominant-baseline="central"
             font-size="80px">Firetrace</text>
         <use xlink:href="#firetracetext" class="color1"></use>
