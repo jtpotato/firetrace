@@ -10,7 +10,7 @@ device=torch.device("cpu")
 def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, saved_epochs, additional_epochs):
     firetrace_model.to(device)
 
-    loss_function = nn.MSELoss()
+    loss_function = torch.compile(nn.MSELoss(), fullgraph=True, mode="max-autotune")
 
     optimizer = torch.optim.Adam(firetrace_model.parameters(), lr=0.00001)
 
