@@ -20,7 +20,7 @@ train_dataset = FiretraceData(X_train, y_train)
 train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
 WIDTH = 30
-DEPTH = 10
+DEPTH = 20
 
 firetrace_model = torch.compile(
     FiretraceMLP(width=WIDTH, depth=DEPTH), fullgraph=True, mode="max-autotune"
@@ -36,7 +36,7 @@ if os.path.exists("models/firetrace_model.pt"):
 else:
     saved_epochs = 0
 
-ADDTIONAL_EPOCHS = 2500
+ADDTIONAL_EPOCHS = 10000
 
 train_loop(
     X_train,
