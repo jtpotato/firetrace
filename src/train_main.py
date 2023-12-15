@@ -19,24 +19,42 @@ train_dataset = FiretraceData(X_train, y_train)
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
-WIDTH=40
-DEPTH=15
+WIDTH = 30
+DEPTH = 10
 
-firetrace_model = torch.compile(FiretraceMLP(width=WIDTH, depth=DEPTH), fullgraph=True, mode="max-autotune")
+firetrace_model = torch.compile(
+    FiretraceMLP(width=WIDTH, depth=DEPTH), fullgraph=True, mode="max-autotune"
+)
 
 # Load from previous
 if os.path.exists("models/firetrace_model.pt"):
-  checkpoint = torch.load("models/firetrace_model.pt")
-  firetrace_model.load_state_dict(checkpoint['model_state_dict'])
-  firetrace_model.train()
+    checkpoint = torch.load("models/firetrace_model.pt")
+    firetrace_model.load_state_dict(checkpoint["model_state_dict"])
+    firetrace_model.train()
 
-  saved_epochs = checkpoint['epochs']
+    saved_epochs = checkpoint["epochs"]
 else:
-  saved_epochs = 0
+    saved_epochs = 0
 
-ADDTIONAL_EPOCHS = 4500
+ADDTIONAL_EPOCHS = 2500
 
-train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, saved_epochs, ADDTIONAL_EPOCHS)
+train_loop(
+    X_train,
+    X_test,
+    y_train,
+    y_test,
+    train_loader,
+    firetrace_model,
+    saved_epochs,
+    ADDTIONAL_EPOCHS,
+)
 
 print(f"FINISHED TRAINING. TOTAL EPOCHS: {saved_epochs + ADDTIONAL_EPOCHS}")
-torch.save({'model_state_dict': firetrace_model.state_dict(), 'epochs': saved_epochs + ADDTIONAL_EPOCHS, 'model_size': [WIDTH, DEPTH]}, "models/firetrace_model.pt")
+torch.save(
+    {
+        "model_state_dict": firetrace_model.state_dict(),
+        "epochs": saved_epochs + ADDTIONAL_EPOCHS,
+        "model_size": [WIDTH, DEPTH],
+    },
+    "models/firetrace_model.pt",
+)
