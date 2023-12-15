@@ -17,7 +17,7 @@ train_dataset = FiretraceData(X_train, y_train)
 
 # print(X_train, y_train.values)
 
-train_loader = DataLoader(dataset=train_dataset, batch_size=128, shuffle=True)
+train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
 WIDTH=40
 DEPTH=15
