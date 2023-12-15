@@ -9,6 +9,7 @@ import torch
 from FiretraceData import FiretraceData
 from FiretraceMLP import FiretraceMLP
 from FiretraceImport import FiretraceImport
+from TrainLoop import train_loop
 
 X_train, X_test, y_train, y_test = FiretraceImport()
 
@@ -18,11 +19,11 @@ train_dataset = FiretraceData(X_train, y_train)
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=128, shuffle=True)
 
-firetrace_model = FiretraceMLP()
-compiled_model = torch.compile(firetrace_model)
+WIDTH=40
+DEPTH=15
 
-loss_function = nn.MSELoss()
-optimizer = torch.optim.Adam(compiled_model.parameters(), lr=0.00001)
+firetrace_model = FiretraceMLP(width=WIDTH, depth=DEPTH)
+compiled_model = torch.compile(firetrace_model)
 
 # Load from previous
 if os.path.exists("models/firetrace_model.pt"):
@@ -34,37 +35,9 @@ if os.path.exists("models/firetrace_model.pt"):
 else:
   saved_epochs = 0
 
-ADDTIONAL_EPOCHS = 10000
+ADDTIONAL_EPOCHS = 4500
 
-for epoch in range(saved_epochs, saved_epochs + ADDTIONAL_EPOCHS):
-    epoch_loss = 0.0
-    # Iterate over the DataLoader for training data
-    for i, data in enumerate(train_loader, 0):
-        # Get and prepare inputs
-        inputs, targets = data
-        inputs, targets = inputs.float(), targets.float()
-        targets = targets.reshape((targets.shape[0], 1))
-
-        # Zero the gradients
-        optimizer.zero_grad()
-
-        outputs = compiled_model(inputs)
-
-        loss = loss_function(outputs, targets)
-
-        # Perform backward pass
-        loss.backward()
-        optimizer.step()
-
-        # Print statistics
-        epoch_loss += loss.item()
-
-    if epoch % 100 == 0:
-        # Validate model
-        test_output = compiled_model(torch.tensor(X_test).float())
-        test_loss = loss_function(test_output, torch.tensor(y_test).float().reshape((y_test.shape[0], 1)))
-
-        print(f"Epoch {epoch} | Loss: {epoch_loss / len(train_loader)} | Val Loss: {test_loss} | Sample Output: {test_output[50]}")
+train_loop(X_train, X_test, y_train, y_test, train_loader, compiled_model, saved_epochs, ADDTIONAL_EPOCHS)
 
 print(f"FINISHED TRAINING. TOTAL EPOCHS: {saved_epochs + ADDTIONAL_EPOCHS}")
-torch.save({'model_state_dict': compiled_model.state_dict(), 'epochs': saved_epochs + ADDTIONAL_EPOCHS}, "models/firetrace_model.pt")
+torch.save({'model_state_dict': compiled_model.state_dict(), 'epochs': saved_epochs + ADDTIONAL_EPOCHS, 'model_size': [WIDTH, DEPTH]}, "models/firetrace_model.pt")
