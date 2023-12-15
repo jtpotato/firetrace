@@ -23,13 +23,12 @@ WIDTH=40
 DEPTH=15
 
 firetrace_model = FiretraceMLP(width=WIDTH, depth=DEPTH)
-compiled_model = torch.compile(firetrace_model, backend="aot_eager")
 
 # Load from previous
 if os.path.exists("models/firetrace_model.pt"):
   checkpoint = torch.load("models/firetrace_model.pt")
-  compiled_model.load_state_dict(checkpoint['model_state_dict'])
-  compiled_model.train()
+  firetrace_model.load_state_dict(checkpoint['model_state_dict'])
+  firetrace_model.train()
 
   saved_epochs = checkpoint['epochs']
 else:
@@ -37,7 +36,7 @@ else:
 
 ADDTIONAL_EPOCHS = 4500
 
-train_loop(X_train, X_test, y_train, y_test, train_loader, compiled_model, saved_epochs, ADDTIONAL_EPOCHS)
+train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, saved_epochs, ADDTIONAL_EPOCHS)
 
 print(f"FINISHED TRAINING. TOTAL EPOCHS: {saved_epochs + ADDTIONAL_EPOCHS}")
-torch.save({'model_state_dict': compiled_model.state_dict(), 'epochs': saved_epochs + ADDTIONAL_EPOCHS, 'model_size': [WIDTH, DEPTH]}, "models/firetrace_model.pt")
+torch.save({'model_state_dict': firetrace_model.state_dict(), 'epochs': saved_epochs + ADDTIONAL_EPOCHS, 'model_size': [WIDTH, DEPTH]}, "models/firetrace_model.pt")
