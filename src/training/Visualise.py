@@ -34,3 +34,19 @@ def generate_visualisation(compiled_model, epoch):
   plt.savefig(f"training_visualisations/{epoch}_vis.jpg")
 
   plt.clf()
+
+def graph_loss(history):
+  plt.plot(history[0], label="Train Loss")
+  plt.plot(history[1], label="Val Loss")
+  plt.legend()
+  plt.title("Train vs Val Loss")
+  plt.xlabel("Epoch Unit")
+  plt.ylabel("Loss")
+
+  if len(history[2]) > 0:
+    for epoch in history[2]:
+      plt.axvline(epoch, color="r", linestyle="--", lw=0.5)
+
+  plt.savefig(f"training_visualisations/loss.jpg")
+
+  plt.clf()
