@@ -18,9 +18,10 @@ with gr.Blocks() as demo:
   generate_believeable_button.click(believeable_values, inputs=[], outputs=[soi, max_t_bne, max_t_mel, max_t_cns, max_t_pth, max_t_syd, day, month, year])
 
   prediction = gr.Markdown(value="Waiting...")
+  map = gr.Plot()
 
   predict_button = gr.Button(value="Predict")
-  predict_button.click(get_ui_prediction, inputs=[soi, max_t_bne, max_t_mel, max_t_cns, max_t_pth, max_t_syd, day, month, year], outputs=prediction)
+  predict_button.click(get_ui_prediction, inputs=[soi, max_t_bne, max_t_mel, max_t_cns, max_t_pth, max_t_syd, day, month, year], outputs=[prediction, map])
 
 # print(get_prediction(10.9,28.2,24.4,31.9,22.9,26.0,-0.8660254037844386,0.5000000000000001,2005.0))
   
