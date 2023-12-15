@@ -19,8 +19,8 @@ train_dataset = FiretraceData(X_train, y_train)
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
-WIDTH = 30
-DEPTH = 20
+WIDTH = 10
+DEPTH = 5
 
 firetrace_model = torch.compile(
     FiretraceMLP(width=WIDTH, depth=DEPTH), fullgraph=True, mode="max-autotune"
