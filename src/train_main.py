@@ -36,7 +36,7 @@ if os.path.exists("models/firetrace_model.pt"):
 else:
     saved_epochs = 0
 
-ADDTIONAL_EPOCHS = 10000
+ADDTIONAL_EPOCHS = 100000
 
 train_loop(
     X_train,
@@ -47,14 +47,8 @@ train_loop(
     firetrace_model,
     saved_epochs,
     ADDTIONAL_EPOCHS,
+    WIDTH,
+    DEPTH
 )
 
-print(f"FINISHED TRAINING. TOTAL EPOCHS: {saved_epochs + ADDTIONAL_EPOCHS}")
-torch.save(
-    {
-        "model_state_dict": firetrace_model.state_dict(),
-        "epochs": saved_epochs + ADDTIONAL_EPOCHS,
-        "model_size": [WIDTH, DEPTH],
-    },
-    "models/firetrace_model.pt",
-)
+print(f"FINISHED TRAINING. TOTAL EPOCHS (disregard if early stopping): {saved_epochs + ADDTIONAL_EPOCHS}")
