@@ -2,6 +2,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from training.Visualise import generate_visualisation
+
 device=torch.device("cpu")
 
 # if torch.backends.mps.is_available() and torch.backends.mps.is_built():
@@ -13,7 +15,7 @@ loss_function = torch.compile(nn.MSELoss(), fullgraph=True, mode="max-autotune")
 def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, saved_epochs, additional_epochs, width, depth):
     firetrace_model.to(device)
 
-    optimizer = torch.optim.Adam(firetrace_model.parameters(), lr=0.0001)
+    optimizer = torch.optim.Adam(firetrace_model.parameters(), lr=1e-5)
 
     best_loss = np.inf
     mega_epochs_since_best = 0
@@ -48,6 +50,8 @@ def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, 
             print(
                 f"Epoch {epoch} | Loss: {epoch_loss / len(train_loader)} | Val Loss: {test_loss} | Sample Output: {test_output[50].item()} | Actual: {y_test[50]}"
             )
+
+            generate_visualisation(firetrace_model, epoch)
 
             if test_loss < best_loss:
                 best_loss = test_loss
