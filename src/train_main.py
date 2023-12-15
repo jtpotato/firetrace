@@ -9,7 +9,7 @@ import torch
 from training.FiretraceData import FiretraceData
 from training.FiretraceMLP import FiretraceMLP
 from training.FiretraceImport import FiretraceImport
-from training.TrainLoop import train_loop
+from training.training_loop import train_loop
 
 X_train, X_test, y_train, y_test = FiretraceImport()
 
@@ -19,36 +19,4 @@ train_dataset = FiretraceData(X_train, y_train)
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
-WIDTH = 10
-DEPTH = 5
-
-firetrace_model = torch.compile(
-    FiretraceMLP(width=WIDTH, depth=DEPTH), fullgraph=True, mode="max-autotune"
-)
-
-# Load from previous
-if os.path.exists("models/firetrace_model.pt"):
-    checkpoint = torch.load("models/firetrace_model.pt")
-    firetrace_model.load_state_dict(checkpoint["model_state_dict"])
-    firetrace_model.train()
-
-    saved_epochs = checkpoint["epochs"]
-else:
-    saved_epochs = 0
-
-ADDTIONAL_EPOCHS = 100000
-
-train_loop(
-    X_train,
-    X_test,
-    y_train,
-    y_test,
-    train_loader,
-    firetrace_model,
-    saved_epochs,
-    ADDTIONAL_EPOCHS,
-    WIDTH,
-    DEPTH
-)
-
-print(f"FINISHED TRAINING. TOTAL EPOCHS (disregard if early stopping): {saved_epochs + ADDTIONAL_EPOCHS}")
+train_loop(X_test, y_test, train_loader, epoch_limit=1000000, retries=5)
