@@ -22,7 +22,7 @@ train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 WIDTH=40
 DEPTH=15
 
-firetrace_model = FiretraceMLP(width=WIDTH, depth=DEPTH)
+firetrace_model = torch.compile(FiretraceMLP(width=WIDTH, depth=DEPTH), fullgraph=True, mode="max-autotune")
 
 # Load from previous
 if os.path.exists("models/firetrace_model.pt"):
