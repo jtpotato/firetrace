@@ -6,10 +6,10 @@ from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch
 
-from FiretraceData import FiretraceData
-from FiretraceMLP import FiretraceMLP
-from FiretraceImport import FiretraceImport
-from TrainLoop import train_loop
+from training.FiretraceData import FiretraceData
+from training.FiretraceMLP import FiretraceMLP
+from training.FiretraceImport import FiretraceImport
+from training.TrainLoop import train_loop
 
 X_train, X_test, y_train, y_test = FiretraceImport()
 
