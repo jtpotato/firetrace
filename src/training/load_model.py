@@ -3,13 +3,14 @@ import os
 import torch
 
 from training.FiretraceMLP import FiretraceMLP
+from training.constants import MODEL_WIDTH, MODEL_DEPTH
+
+firetrace_model = torch.compile(
+    FiretraceMLP(width=MODEL_WIDTH, depth=MODEL_DEPTH), fullgraph=True, mode="max-autotune"
+)
 
 
-def load_model(width, depth):
-  firetrace_model = torch.compile(
-      FiretraceMLP(width=width, depth=depth), fullgraph=True, mode="max-autotune"
-  )
-
+def load_model():
   saved_epochs = 0
   history = [[], [], []]
 
