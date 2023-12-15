@@ -2,26 +2,31 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from training.Visualise import generate_visualisation, graph_loss
+from training.visualise import generate_visualisation, graph_loss
 from training.train_model import train_model
 from training.save_on_improvement import save_model_if_improved
 from training.validate import validate_model
 from training.load_model import load_model
 
-device=torch.device("cpu")
+device = torch.device("cpu")
 
 loss_function = torch.compile(nn.MSELoss(), fullgraph=True, mode="max-autotune")
 
-MODEL_WIDTH = 35
-MODEL_DEPTH = 4
-
 def train_loop(X_test, y_test, train_loader, epoch_limit, retries):
+    print(
+        f"ENTERING TRAINING LOOP.\n\
+        EACH LOOP HAS A MAXIMUM LENGTH OF {epoch_limit} EPOCHS.\n\
+        THE MODEL WILL ATTEMPT TO TRAIN FOR {retries} LOOPS."
+    )
+
     for i in range(retries):
-        firetrace_model, saved_epochs, history = load_model(width=MODEL_WIDTH, depth=MODEL_DEPTH)
+        firetrace_model, saved_epochs, history = load_model()
 
         firetrace_model.to(device)
 
-        optimizer = torch.optim.AdamW(firetrace_model.parameters(), lr=1 * 1e-4, weight_decay=1e-3)
+        optimizer = torch.optim.AdamW(
+            firetrace_model.parameters(), lr=1 * 1e-5, weight_decay=1e-4
+        )
 
         best_loss = np.inf
         mega_epochs_since_best = 0
@@ -30,10 +35,23 @@ def train_loop(X_test, y_test, train_loader, epoch_limit, retries):
             epoch_loss = 0.0
             for i, data in enumerate(train_loader, 0):
                 inputs, targets = data
-                epoch_loss += train_model(inputs, targets, firetrace_model, optimizer, loss_function=loss_function, device=device)
+                epoch_loss += train_model(
+                    inputs,
+                    targets,
+                    firetrace_model,
+                    optimizer,
+                    loss_function=loss_function,
+                    device=device,
+                )
 
             if epoch % 10 == 0:
-                test_loss, test_output = validate_model(X_test, y_test, firetrace_model, loss_function=loss_function, device=device)
+                test_loss, test_output = validate_model(
+                    X_test,
+                    y_test,
+                    firetrace_model,
+                    loss_function=loss_function,
+                    device=device,
+                )
 
                 print(
                     f"Epoch {epoch} | Loss: {epoch_loss / len(train_loader)} | Val Loss: {test_loss} | Sample Output: {test_output[50].item()} | Actual: {y_test[50]}"
@@ -44,7 +62,13 @@ def train_loop(X_test, y_test, train_loader, epoch_limit, retries):
 
                 generate_visualisation(firetrace_model, epoch)
 
-                best_loss, increment = save_model_if_improved(test_loss, best_loss, firetrace_model, epoch, MODEL_WIDTH, MODEL_DEPTH, history)
+                best_loss, increment = save_model_if_improved(
+                    test_loss,
+                    best_loss,
+                    firetrace_model,
+                    epoch,
+                    history,
+                )
                 mega_epochs_since_best += increment
 
                 if mega_epochs_since_best > 50:

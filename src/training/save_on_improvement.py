@@ -1,7 +1,9 @@
 import torch
 
+from training.constants import MODEL_WIDTH, MODEL_DEPTH
 
-def save_model_if_improved(test_loss, best_loss, model, epoch, width, depth, training_history):
+
+def save_model_if_improved(test_loss, best_loss, model, epoch, training_history):
     if test_loss < best_loss:
         training_history[2].append(epoch / 10)
         best_loss = test_loss
@@ -9,7 +11,7 @@ def save_model_if_improved(test_loss, best_loss, model, epoch, width, depth, tra
             {
                 "model_state_dict": model.state_dict(),
                 "epochs": epoch,
-                "model_size": [width, depth],
+                "model_size": [MODEL_WIDTH, MODEL_DEPTH],
                 "history": training_history,
             },
             "models/firetrace_model.pt",
