@@ -12,7 +12,7 @@ def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, 
 
     loss_function = torch.compile(nn.MSELoss(), fullgraph=True, mode="max-autotune")
 
-    optimizer = torch.optim.Adam(firetrace_model.parameters(), lr=0.00001)
+    optimizer = torch.optim.Adam(firetrace_model.parameters(), lr=0.0001)
 
     for epoch in range(saved_epochs, saved_epochs + additional_epochs):
         epoch_loss = 0.0
@@ -42,5 +42,5 @@ def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, 
             test_loss = loss_function(test_output, torch.tensor(y_test, dtype=torch.float32, device=device).float()).item()
 
             print(
-                f"Epoch {epoch} | Loss: {epoch_loss / len(train_loader)} | Val Loss: {test_loss} | Sample Output: {test_output[50].float()}"
+                f"Epoch {epoch} | Loss: {epoch_loss / len(train_loader)} | Val Loss: {test_loss} | Sample Output: {test_output[50].item()} | Actual: {y_test[50]}"
             )
