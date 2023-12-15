@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torch.nn as nn
 
@@ -7,12 +8,15 @@ device=torch.device("cpu")
 #     print("Using MPS.")
 #     device = torch.device("mps")
 
-def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, saved_epochs, additional_epochs):
+loss_function = torch.compile(nn.MSELoss(), fullgraph=True, mode="max-autotune")
+
+def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, saved_epochs, additional_epochs, width, depth):
     firetrace_model.to(device)
 
-    loss_function = torch.compile(nn.MSELoss(), fullgraph=True, mode="max-autotune")
-
     optimizer = torch.optim.Adam(firetrace_model.parameters(), lr=0.0001)
+
+    best_loss = np.inf
+    mega_epochs_since_best = 0
 
     for epoch in range(saved_epochs, saved_epochs + additional_epochs):
         epoch_loss = 0.0
@@ -44,3 +48,22 @@ def train_loop(X_train, X_test, y_train, y_test, train_loader, firetrace_model, 
             print(
                 f"Epoch {epoch} | Loss: {epoch_loss / len(train_loader)} | Val Loss: {test_loss} | Sample Output: {test_output[50].item()} | Actual: {y_test[50]}"
             )
+
+            if test_loss < best_loss:
+                best_loss = test_loss
+                mega_epochs_since_best = 0
+                torch.save(
+                    {
+                        "model_state_dict": firetrace_model.state_dict(),
+                        "epochs": epoch,
+                        "model_size": [width, depth],
+                    },
+                    "models/firetrace_model.pt",
+                )
+                print(f"SAVED MODEL AT EPOCH {epoch}")
+            else:
+                mega_epochs_since_best += 1
+
+            if mega_epochs_since_best > 20:
+                print("EARLY STOPPING")
+                break
