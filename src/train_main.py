@@ -23,7 +23,7 @@ WIDTH=40
 DEPTH=15
 
 firetrace_model = FiretraceMLP(width=WIDTH, depth=DEPTH)
-compiled_model = torch.compile(firetrace_model)
+compiled_model = torch.compile(firetrace_model, backend="aot_eager")
 
 # Load from previous
 if os.path.exists("models/firetrace_model.pt"):
