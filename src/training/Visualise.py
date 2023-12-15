@@ -4,7 +4,7 @@ import torch
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv("../data/gen_2/processed/with_fire_area_soi_weather_time.csv")
+df = pd.read_csv("data/gen_2/processed/with_fire_area_soi_weather_time.csv")
 
 # Pick last x rows
 df = df.tail(500)
@@ -14,8 +14,8 @@ y = y.reset_index()["fire_area"]
 X = df.drop("fire_area", axis=1)
 
 # Scale stuff
-x_scaler = joblib.load("../models/x_scaler.save")
-y_scaler = joblib.load("../models/y_scaler.save")
+x_scaler = joblib.load("models/x_scaler.save")
+y_scaler = joblib.load("models/y_scaler.save")
 
 x_scaled = x_scaler.transform(X)
 
@@ -32,3 +32,5 @@ def generate_visualisation(compiled_model, epoch):
   plt.ylabel("Fire Area (sqkm)")
 
   plt.savefig(f"training_visualisations/{epoch}_vis.jpg")
+
+  plt.clf()
