@@ -1,7 +1,3 @@
-"""
-This file contains the theme for the Gradio interface.
-"""
-
 import gradio as gr
 
 theme = gr.themes.Default(

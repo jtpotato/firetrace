@@ -2,4 +2,5 @@
 venv/
 __pycache__
 checkpoints
-data/gen_2/unprocessed/
+data/gen_2/unprocessed
+training_visualisations

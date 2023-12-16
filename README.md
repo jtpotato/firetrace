@@ -5,8 +5,8 @@ colorFrom: "yellow"
 colorTo: "gray"
 sdk: "gradio"
 python_version: "3.11"
-sdk_version: "3.40.1"
-app_file: "app.py"
+sdk_version: "4.10.0"
+app_file: "src/frontend_main.py"
 pinned: true
 fullWidth: true
 ---
@@ -52,4 +52,6 @@ prediction = loaded_model.serve(data_df)
 # Roadmap
 See [Issues](https://github.com/jtpotato/firetrace/issues)
 
-https://docs.google.com/forms/u/0/d/e/1FAIpQLScQqeT4NGpCGj5Uvjy5yLtptGuPUQFFuHSzVSZjySyGNyE8gw/formResponse
+# Developers
+Some important notes:
+- `PyTorch` requires Python `< 3.12` for now.
