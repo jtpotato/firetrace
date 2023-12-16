@@ -1,0 +1,8 @@
+gradio==4.10.0
+plotly==5.18.0
+torch
+torchaudio
+torchvision
+pandas
+joblib
+numpy
