@@ -23,8 +23,8 @@ def train_loop(X_test, y_test, train_loader, epoch_limit):
 
     firetrace_model.to(device)
 
-    optimizer = torch.optim.AdamW(
-        firetrace_model.parameters(), lr=1 * 1e-5, weight_decay=1e-6
+    optimizer = torch.optim.Adam(
+        firetrace_model.parameters(), lr=1 * 1e-4
     )
 
     best_loss = np.inf
@@ -67,6 +67,7 @@ def train_loop(X_test, y_test, train_loader, epoch_limit):
                 firetrace_model,
                 epoch,
                 history,
+                threshold=0.00001,
             )
             mega_epochs_since_best += increment
 

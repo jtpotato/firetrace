@@ -45,7 +45,7 @@ def graph_loss(history):
 
   if len(history[2]) > 0:
     for epoch in history[2]:
-      plt.axvline(epoch, color="r", linestyle="--", lw=0.5)
+      plt.axvline(epoch, color="r", linestyle="--", lw=0.2)
 
   plt.savefig(f"training_visualisations/loss.jpg")
 

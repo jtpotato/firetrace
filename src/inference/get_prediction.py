@@ -21,4 +21,5 @@ def get_prediction(soi, max_t_bne, max_t_mel, max_t_cns, max_t_pth, max_t_syd, s
     model_output = compiled_model(torch.tensor(scaled_inputs).float())
 
     scaled_output = y_scaler.inverse_transform(model_output.detach().numpy().reshape(1, -1))[0][0]
+    scaled_output = max(scaled_output, 0) # prevent negatives.
     return scaled_output

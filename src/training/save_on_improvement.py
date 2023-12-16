@@ -3,8 +3,8 @@ import torch
 from training.constants import MODEL_WIDTH, MODEL_DEPTH
 
 
-def save_model_if_improved(test_loss, best_loss, model, epoch, training_history):
-    if test_loss < best_loss:
+def save_model_if_improved(test_loss, best_loss, model, epoch, training_history, threshold):
+    if test_loss + threshold < best_loss:
         training_history[2].append(epoch / 10)
         best_loss = test_loss
         torch.save(
