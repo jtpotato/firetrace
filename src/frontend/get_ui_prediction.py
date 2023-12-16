@@ -15,5 +15,5 @@ def get_ui_prediction(soi, max_t_bne, max_t_mel, max_t_cns, max_t_pth, max_t_syd
     fire_size = get_prediction(soi, max_t_bne, max_t_mel, max_t_cns, max_t_pth, max_t_syd, sin_signal, cos_signal, year)
 
     context_string = additional_context(fire_size)
-    figure = generate_map(fire_size)
+    figure = generate_map(fire_size, str(int(month)).zfill(2))
     return f"{context_string}", figure

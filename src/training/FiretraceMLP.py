@@ -11,7 +11,6 @@ class FiretraceMLP(nn.Module):
         self.layers.extend([nn.Linear(width, width), nn.ReLU()] * depth)
 
         self.layers.append(nn.Linear(width, 1))
-        self.layers.append(nn.Softplus())
 
     def forward(self, x):
         result = x
