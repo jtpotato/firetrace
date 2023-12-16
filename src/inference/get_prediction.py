@@ -5,8 +5,8 @@ from training.FiretraceMLP import FiretraceMLP
 
 checkpoint = torch.load("models/firetrace_model.pt")
 
-model = FiretraceMLP(width=checkpoint['model_size'][0], depth=checkpoint['model_size'][1], fullgraph=True, mode="max-autotune")
-compiled_model = torch.compile(model)
+model = FiretraceMLP(width=checkpoint['model_size'][0], depth=checkpoint['model_size'][1])
+compiled_model = torch.compile(model, fullgraph=True, mode="max-autotune")
 
 compiled_model.load_state_dict(checkpoint['model_state_dict'])
 compiled_model.eval()
