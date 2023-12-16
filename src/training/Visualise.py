@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("data/gen_2/processed/with_fire_area_soi_weather_time.csv")
 
 # Pick last x rows
-df = df.tail(500)
+df = df.tail(1000)
 
 y = df["fire_area"]
 y = y.reset_index()["fire_area"]

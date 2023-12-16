@@ -19,4 +19,4 @@ train_dataset = FiretraceData(X_train, y_train)
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
 
-train_loop(X_test, y_test, train_loader, epoch_limit=1000000, retries=5)
+train_loop(X_test, y_test, train_loader, epoch_limit=1000000)
