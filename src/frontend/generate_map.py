@@ -22,8 +22,8 @@ def generate_map(fire_size):
         lon="longitude",
         z="visible",
         radius=8,
-        center=dict(lat=-20, lon=140),
-        zoom=4,
+        center=dict(lat=-24, lon=133),
+        zoom=2,
         mapbox_style="open-street-map",
     )
 
