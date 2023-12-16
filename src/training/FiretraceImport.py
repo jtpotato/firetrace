@@ -20,7 +20,7 @@ def FiretraceImport():
     joblib.dump(y_scaler, "models/y_scaler.save")
 
     X_train, X_test, y_train, y_test = train_test_split(
-        df_x_scaled, df_y_scaled, train_size=0.8, random_state=42
+        df_x_scaled, df_y_scaled, train_size=0.8, shuffle=True
     )
 
     return X_train, X_test, y_train, y_test
