@@ -31,10 +31,11 @@ python3 -m pip install -r requirements.txt
 3. Run the web server with `python3 src/frontend-main.py` This will make http://127.0.0.1:7860 accessible via a web browser.
 
 ## Very Advanced: Using Model Weights
-Install `PyTorch` and `scikit-learn`
+Install `PyTorch` and `joblib`
 
 ```python
 import torch
+import joblib
 
 checkpoint = torch.load("models/firetrace_model.pt") # Directories may be different depending on specific environment.
 model = FiretraceMLP(width=checkpoint['model_size'][0], depth=checkpoint['model_size'][1])
