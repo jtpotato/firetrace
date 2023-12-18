@@ -6,9 +6,9 @@ class FiretraceMLP(nn.Module):
         super().__init__()
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(9, width))
-        self.layers.append(nn.ReLU())
+        self.layers.append(nn.LeakyReLU())
 
-        self.layers.extend([nn.Linear(width, width), nn.ReLU()] * depth)
+        self.layers.extend([nn.Linear(width, width), nn.LeakyReLU()] * depth)
 
         self.layers.append(nn.Linear(width, 1))
 

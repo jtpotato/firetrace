@@ -3,11 +3,10 @@ import joblib
 import torch
 import matplotlib.pyplot as plt
 
-
 df = pd.read_csv("data/gen_2/processed/with_fire_area_soi_weather_time.csv")
 
 # Pick last x rows
-df = df.tail(1000)
+df = df.tail(3500) # approx 10 years. 4 years are the test set, 6 are the training set
 
 y = df["fire_area"]
 y = y.reset_index()["fire_area"]
@@ -19,7 +18,9 @@ y_scaler = joblib.load("models/y_scaler.save")
 
 x_scaled = x_scaler.transform(X)
 
-def generate_visualisation(compiled_model, epoch):
+# initialise matplotlib in main
+
+def draw_visualisation(compiled_model, epoch):
   test_output = compiled_model(torch.tensor(x_scaled, dtype=torch.float32))
   y_unscaled = y_scaler.inverse_transform(test_output.detach().numpy())
 
