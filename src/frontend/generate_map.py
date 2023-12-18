@@ -28,8 +28,9 @@ def generate_map(fire_size, month: str):
             lat=month_df.latitude,
             lon=month_df.longitude,
             z=month_df.visible,
-            radius=2,
+            radius=8,
             showscale=False,
+            colorscale=["red", "orange", "yellow"]
         )
     )
 
