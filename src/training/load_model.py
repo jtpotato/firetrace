@@ -10,13 +10,16 @@ firetrace_model = torch.compile(
 )
 
 
-def load_model():
+def load_model(model_path=None):
   saved_epochs = 0
   history = [[], [], []]
 
+  if model_path == None:
+    model_path = "models/firetrace_model.pt"
+
   # Load from previous
-  if os.path.exists("models/firetrace_model.pt"):
-      checkpoint = torch.load("models/firetrace_model.pt")
+  if os.path.exists(model_path):
+      checkpoint = torch.load(model_path)
       firetrace_model.load_state_dict(checkpoint["model_state_dict"])
       firetrace_model.train()
       history = checkpoint["history"]
